@@ -31,6 +31,7 @@ function ItemForm({ onAddItem }) {
           name="name"
           value={name}
           onChange={(event) => setName(event.target.value)}
+          required
         />
       </label>
 

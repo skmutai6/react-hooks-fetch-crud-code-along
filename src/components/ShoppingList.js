@@ -11,6 +11,20 @@ function ShoppingList() {
       .then((res) => res.json())
       .then((items) => setItems(items));
   }, []);
+  function handleDeleteItem(deletedItem) {
+    console.log("In ShoppingCart:", deletedItem);
+  }
+
+  function handleUpdateItem(updatedItem) {
+    const updatedItems = items.map((item) => {
+      if (item.id === updatedItem.id) {
+        return updatedItem;
+      } else {
+        return item;
+      }
+    });
+    setItems(updatedItems);
+  }
 
   function handleAddItem(newItem) {
     setItems([...items, newItem]);
@@ -39,8 +53,14 @@ function ShoppingList() {
         onCategoryChange={handleCategoryChange}
       />
       <ul className="Items">
+        {/* pass it as a prop to Item */}
         {itemsToDisplay.map((item) => (
-          <Item key={item.id} item={item} onDeleteItem={handleDeleteItem} />
+          <Item
+            key={item.id}
+            item={item}
+            onUpdateItem={handleUpdateItem}
+            onDeleteItem={handleDeleteItem}
+          />
         ))}
       </ul>
     </div>
